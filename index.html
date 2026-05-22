@@ -5,7 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDR X Wallet</title>
     <style>
-        body<div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+        <body>
+<div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+    <h1 id="walletName" style="color:#38bdf8; font-size:40px; animation: textAnimation 4s forwards;">TDR X Wallet</h1>
+    <div id="actionButtons" style="display:none; text-align:center;">
+        <button onclick="createWallet()" style="padding:15px 30px; background:#38bdf8; border:none; color:white; border-radius:10px; font-weight:bold; cursor:pointer;">Create New Wallet</button>
+        <button onclick="importWallet()" style="padding:15px 30px; margin-top:10px; background:transparent; border:1px solid #38bdf8; color:#38bdf8; border-radius:10px; cursor:pointer;">I have a wallet</button>
+    </div>
+</div>
+
+<style>
+    @keyframes textAnimation { 0%{opacity:0;} 30%{opacity:1;} 70%{opacity:1;} 100%{opacity:0;} }
+</style>
+
+<script>
+    // ৪ সেকেন্ড পর অ্যানিমেশন লুকানোর লজিক
+    setTimeout(function() {
+        document.getElementById('walletName').style.display = 'none';
+        document.getElementById('actionButtons').style.display = 'block';
+    }, 4000);
+
+    // প্রতিটি ইউজারের জন্য ইউনিক ১২টি শব্দ তৈরির ফাংশন
+    function generateMnemonic() {
+        const words = ["apple", "orbit", "dune", "silver", "cloud", "mirror", "tiger", "echo", "flame", "ocean", "breeze", "stone", "shadow", "spark", "glory"];
+        let result = [];
+        for(let i=0; i<12; i++) {
+            result.push(words[Math.floor(Math.random() * words.length)]);
+        }
+        return result.join(" ");
+    }
+
+    function createWallet() {
+        const myMnemonic = generateMnemonic();
+        alert("Your Secret Recovery Phrase:\n\n" + myMnemonic + "\n\nSAVE THIS! This is your unique key. We will not provide this again.");
+        document.getElementById('animationContainer').style.display = 'none';
+    }
+
+    function importWallet() {
+        let input = prompt("Enter your 12-word recovery phrase:");
+        if(input && input.split(" ").length >= 12) {
+            alert("Wallet successfully imported!");
+            document.getElementById('animationContainer').style.display = 'none';
+        } else {
+            alert("Invalid phrase!");
+        }
+    }
+</script>
+
+... (আপনার আগের কোড) ...
+</body>
+    <div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
     <h1 id="walletName" style="color:#38bdf8; font-size:35px; animation: textAnimation 4s forwards;">TDR X Wallet</h1>
     <div id="actionButtons" style="display:none; text-align:center;">
         <button onclick="createWallet()" style="padding:15px 30px; margin:10px; background:#38bdf8; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Create Wallet</button>
