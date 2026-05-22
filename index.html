@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
@@ -19,25 +19,38 @@
     </div>
 
     <div class="token-list">
-        <div class="token-item"><span>BTC</span> <span id="BTC">...</span></div>
-        <div class="token-item"><span>ETH</span> <span id="ETH">...</span></div>
-        <div class="token-item"><span>BNB</span> <span id="BNB">...</span></div>
-        <div class="token-item"><span>SOL</span> <span id="SOL">...</span></div>
+        <div class="token-item"><span>BTC</span> <span class="price" id="BTC">...</span></div>
+        <div class="token-item"><span>ETH</span> <span class="price" id="ETH">...</span></div>
+        <div class="token-item"><span>BNB</span> <span class="price" id="BNB">...</span></div>
+        <div class="token-item"><span>SOL</span> <span class="price" id="SOL">...</span></div>
+        <div class="token-item"><span>AVAX</span> <span class="price" id="AVAX">...</span></div>
+        <div class="token-item"><span>LTC</span> <span class="price" id="LTC">...</span></div>
+        <div class="token-item"><span>TON</span> <span class="price" id="TON">...</span></div>
+        <div class="token-item"><span>TRX</span> <span class="price" id="TRX">...</span></div>
         <div class="token-item"><span>USDT</span> <span>$1.00</span></div>
         <div class="token-item"><span>USDC</span> <span>$1.00</span></div>
-        <div class="token-item"><span>AVAX</span> <span id="AVAX">...</span></div>
-        <div class="token-item"><span>LTC</span> <span id="LTC">...</span></div>
-        <div class="token-item"><span>TON</span> <span id="TON">...</span></div>
-        <div class="token-item"><span>TRX</span> <span id="TRX">...</span></div>
     </div>
 
     <script>
+        let previousPrices = {};
+
         async function getPrice(symbol, id) {
             try {
                 let res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
                 let data = await res.json();
-                document.getElementById(id).innerText = '$' + parseFloat(data.price).toFixed(2);
-            } catch(e) { document.getElementById(id).innerText = "Error"; }
+                let newPrice = parseFloat(data.price);
+                let element = document.getElementById(id);
+                
+                if (previousPrices[id] !== undefined) {
+                    if (newPrice > previousPrices[id]) {
+                        element.className = "price price-up";
+                    } else if (newPrice < previousPrices[id]) {
+                        element.className = "price price-down";
+                    }
+                }
+                element.innerText = '$' + newPrice.toFixed(2);
+                previousPrices[id] = newPrice;
+            } catch(e) { console.log("Error"); }
         }
         
         function updateAll() {
@@ -45,7 +58,8 @@
             getPrice('SOL', 'SOL'); getPrice('AVAX', 'AVAX'); getPrice('LTC', 'LTC');
             getPrice('TON', 'TON'); getPrice('TRX', 'TRX');
         }
-        setInterval(updateAll, 5000);
+        
+        setInterval(updateAll, 1000); // ১ সেকেন্ডে আপডেট
         updateAll();
     </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
