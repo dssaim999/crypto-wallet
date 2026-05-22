@@ -1,7 +1,8 @@
-body { font-family: sans-serif; background: #000; color: #fff; margin: 0; }
-.header { padding: 20px; text-align: center; font-weight: bold; font-size: 22px; }
-.balance-section { background: #1a1a1a; margin: 20px; padding: 25px; border-radius: 20px; text-align: center; }
-.balance { font-size: 40px; color: #38bdf8; font-weight: bold; }
-.button-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 20px; }
-.btn { background: #222; padding: 15px; border-radius: 15px; text-align: center; }
-.footer-nav { position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; background: #111; padding: 15px 0; border-top: 1px solid #333; }
+body { font-family: sans-serif; background: #000; color: #fff; margin: 0; padding-bottom: 80px; }
+.header { padding: 20px; font-weight: bold; font-size: 22px; text-align: center; }
+.balance-section { background: #1a1a1a; margin: 15px; padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #333; }
+.balance { font-size: 35px; color: #38bdf8; font-weight: bold; margin-top: 10px; }
+.token-list { margin: 20px; }
+.token-item { display: flex; justify-content: space-between; background: #1a1a1a; padding: 15px; margin-bottom: 10px; border-radius: 15px; }
+.price-up { color: #00ff00; }
+.price-down { color: #ff3333; }
