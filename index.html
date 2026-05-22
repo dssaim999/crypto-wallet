@@ -2,6 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>TDR X Wallet - Real Market</title>
+    <style>
+        body { background: #000; color: #fff; font-family: Arial; }
+        .token-item { border-bottom: 1px solid #333; padding: 15px; display: flex; justify-content: space-between; }
+        .price { color: #38bdf8; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="mainDashboard" style="padding:20px;">
+    <h2>Live Market Data (Real-Time)</h2>
+    <div id="tokenContainer">
+        </div>
+</div>
+
+<script>
+    // রিয়েল কয়েন আইডি (CoinGecko API অনুযায়ী)
+    const coins = [
+        { id: "bitcoin", symbol: "BTC" },
+        { id: "ethereum", symbol: "ETH" },
+        { id: "binancecoin", symbol: "BNB" },
+        { id: "solana", symbol: "SOL" },
+        { id: "avalanche-2", symbol: "AVAX" },
+        { id: "litecoin", symbol: "LTC" },
+        { id: "the-open-network", symbol: "TON" },
+        { id: "tron", symbol: "TRX" },
+        { id: "tether", symbol: "USDT" },
+        { id: "usd-coin", symbol: "USDC" }
+    ];
+
+    // রিয়েল ডাটা আনার ফাংশন
+    async function fetchPrices() {
+        try {
+            const ids = coins.map(c => c.id).join(',');
+            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+            const data = await response.json();
+            
+            coins.forEach(coin => {
+                const price = data[coin.id].usd;
+                document.getElementById(coin.symbol + '_price').innerText = "$" + price.toLocaleString();
+            });
+        } catch (e) {
+            console.error("API Error");
+        }
+    }
+
+    // বুটস্ট্র্যাপ
+    const container = document.getElementById('tokenContainer');
+    coins.forEach(c => {
+        container.innerHTML += `<div class="token-item"><span>${c.symbol}</span> <span class="price" id="${c.symbol}_price">Loading...</span></div>`;
+    });
+
+    // ০.০৫ সেকেন্ড নয়, API লিমিট অনুযায়ী প্রতি ২ সেকেন্ডে আপডেট হবে (API এর জন্য এটিই দ্রুততম)
+    setInterval(fetchPrices, 2000);
+    fetchPrices();
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <title>TDR X Wallet - Ultimate Edition</title>
     <style>
         /* প্রফেশনাল ওয়ালেট লেআউট */
