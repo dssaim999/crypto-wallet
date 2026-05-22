@@ -1,78 +1,65 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDR X Wallet</title>
+    <style>
+        body { background: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .token-item { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #333; }
+        .header { text-align: center; font-size: 24px; padding: 20px; font-weight: bold; }
+        
+        /* Animation Styles */
+        #animationContainer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; }
+        @keyframes textAnimation { 0%{opacity:0;} 30%{opacity:1;} 70%{opacity:1;} 100%{opacity:0;} }
+    </style>
 </head>
 <body>
-</script>
-    <div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
+
+    <div id="animationContainer">
         <h1 id="walletName" style="color:#38bdf8; font-size:35px; animation: textAnimation 4s forwards;">TDR X Wallet</h1>
         <div id="actionButtons" style="display:none; text-align:center;">
-            <button onclick="createWallet()" style="padding:15px 30px; margin:10px; background:#38bdf8; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Create Wallet</button>
-            <button onclick="importWallet()" style="padding:15px 30px; margin:10px; background:transparent; border:1px solid #38bdf8; color:#38bdf8; border-radius:10px; cursor:pointer;">I have a wallet</button>
+            <h2 style="margin-bottom:20px;">Welcome to TDR X Wallet</h2>
+            <button onclick="createWallet()" style="display:block; width:250px; padding:15px; margin:10px auto; background:#38bdf8; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Create Wallet</button>
+            <button onclick="importWallet()" style="display:block; width:250px; padding:15px; margin:10px auto; background:transparent; border:1px solid #38bdf8; color:#38bdf8; border-radius:10px; cursor:pointer;">I have a wallet</button>
         </div>
     </div>
-    <style>
-        @keyframes textAnimation {
-            0% { opacity: 0; transform: scale(0.8); }
-            30% { opacity: 1; transform: scale(1); }
-            70% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; }
-        }
-    </style>
+
+    <div class="header">TDR X Wallet</div>
+    <div style="text-align:center; padding:20px;">
+        <p>Total Balance</p>
+        <div style="font-size:30px; font-weight:bold;">$1,250.00</div>
+    </div>
+
+    <div class="token-list">
+        <div class="token-item"><span>BTC (Bitcoin)</span> <span>$65,000</span></div>
+        <div class="token-item"><span>ETH (Ethereum)</span> <span>$3,500</span></div>
+        <div class="token-item"><span>BNB (Binance)</span> <span>$600</span></div>
+    </div>
+
     <script>
+        // ৪ সেকেন্ড পর অ্যানিমেশন সরিয়ে বাটন দেখানো
         setTimeout(function() {
             document.getElementById('walletName').style.display = 'none';
             document.getElementById('actionButtons').style.display = 'block';
         }, 4000);
-        function createWallet() { alert("নতুন ওয়ালেট তৈরির প্রক্রিয়া শুরু হচ্ছে..."); }
-        function importWallet() { prompt("আপনার ১২টি সিক্রেট কোড এখানে লিখুন:"); }
+
+        // ওয়ালেট লজিক
+        const secretKey = "market ocean desert silent silver stable tunnel engine vanish bridge memory future";
+
+        function createWallet() {
+            alert("Your 12-Word Secret Recovery Phrase:\n\n" + secretKey + "\n\nCRITICAL: Copy this! This is your only key to login.");
+        }
+
+        function importWallet() {
+            let input = prompt("Enter your 12-word secret recovery phrase to login:");
+            if(input === secretKey) {
+                alert("Login successful! Welcome to TDR X Wallet.");
+                document.getElementById('animationContainer').style.display = 'none';
+            } else if(input) {
+                alert("Invalid recovery phrase. Access denied.");
+            }
+        }
     </script>
-    
-    <div style="text-align:center; padding:15px;">
-    <button onclick="createWallet()" style="padding:10px; border-radius:5px;">Create Wallet</button>
-    <button onclick="importWallet()" style="padding:10px; border-radius:5px;">I have a wallet</button>
-    </div>
-    <div class="header">TDR X Wallet</div>
-    <div class="balance-section">
-        <p>Total Balance</p>
-        <div class="balance">$1,250.00</div>
-    </div>
-    
-    <div class="button-grid">
-        <div class="btn" onclick="openModal('Deposit')">Deposit</div>
-        <div class="btn" onclick="openModal('Withdraw')">Withdraw</div>
-        <div class="btn" onclick="openModal('Swap')">Swap</div>
-    </div>
-
-    <div class="token-list">
-        <div class="token-item"><span>BTC</span> <span class="price" id="BTC">...</span></div>
-        <div class="token-item"><span>ETH</span> <span class="price" id="ETH">...</span></div>
-        <div class="token-item"><span>BNB</span> <span class="price" id="BNB">...</span></div>
-        <div class="token-item"><span>SOL</span> <span class="price" id="SOL">...</span></div>
-        <div class="token-item"><span>AVAX</span> <span class="price" id="AVAX">...</span></div>
-        <div class="token-item"><span>LTC</span> <span class="price" id="LTC">...</span></div>
-        <div class="token-item"><span>TON</span> <span class="price" id="TON">...</span></div>
-        <div class="token-item"><span>TRX</span> <span class="price" id="TRX">...</span></div>
-        <div class="token-item"><span>USDT</span> <span>$1.00</span></div>
-        <div class="token-item"><span>USDC</span> <span>$1.00</span></div>
-    </div>
-
-    <div id="actionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
-        <div style="background:#1a1a1a; padding:20px; border-radius:20px; width:80%; border:1px solid #333;">
-            <h3 id="modalTitle" style="text-align:center; margin-top:0;">Action</h3>
-            <input type="number" id="amountInput" placeholder="Enter Amount" style="width:100%; padding:10px; margin-top:10px; border-radius:10px; border:none; background:#333; color:#fff; box-sizing:border-box;">
-            <div style="display:flex; gap:10px; margin-top:20px;">
-                <button onclick="closeModal()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#444; color:#fff; cursor:pointer;">Cancel</button>
-                <button onclick="confirmAction()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#38bdf8; color:#000; font-weight:bold; cursor:pointer;">Confirm</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>window.Telegram.WebApp.expand();</script>
 </body>
 </html>
