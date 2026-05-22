@@ -19,30 +19,36 @@
     </div>
 
     <div class="token-list">
-        <div class="token-item"><span>USDT</span> <span class="price">$1.00</span></div>
-        <div class="token-item"><span>USDC</span> <span class="price">$1.00</span></div>
-        <div class="token-item"><span>BNB</span> <span class="price">$580.00</span></div>
-        <div class="token-item"><span>ETH</span> <span class="price">$3500.00</span></div>
-        <div class="token-item"><span>AVAX</span> <span class="price">$35.00</span></div>
-        <div class="token-item"><span>LTC</span> <span class="price">$85.00</span></div>
-        <div class="token-item"><span>SOL</span> <span class="price">$170.00</span></div>
-        <div class="token-item"><span>TON</span> <span class="price">$6.50</span></div>
-        <div class="token-item"><span>BTC</span> <span class="price">$65000.00</span></div>
-        <div class="token-item"><span>TRON</span> <span class="price">$0.12</span></div>
+        <div class="token-item"><span>BTC</span> <span id="BTC">...</span></div>
+        <div class="token-item"><span>ETH</span> <span id="ETH">...</span></div>
+        <div class="token-item"><span>BNB</span> <span id="BNB">...</span></div>
+        <div class="token-item"><span>SOL</span> <span id="SOL">...</span></div>
+        <div class="token-item"><span>USDT</span> <span>$1.00</span></div>
+        <div class="token-item"><span>USDC</span> <span>$1.00</span></div>
+        <div class="token-item"><span>AVAX</span> <span id="AVAX">...</span></div>
+        <div class="token-item"><span>LTC</span> <span id="LTC">...</span></div>
+        <div class="token-item"><span>TON</span> <span id="TON">...</span></div>
+        <div class="token-item"><span>TRX</span> <span id="TRX">...</span></div>
     </div>
 
     <script>
-        function updatePrices() {
-            const prices = document.querySelectorAll('.price');
-            prices.forEach(p => {
-                let val = parseFloat(p.innerText.replace('$', '').replace(',', ''));
-                let change = (Math.random() - 0.5) * 2;
-                let newVal = val + change;
-                p.innerText = '$' + newVal.toFixed(2);
-                p.className = change >= 0 ? 'price price-up' : 'price price-down';
-            });
+        async function getPrice(symbol, id) {
+            try {
+                let res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
+                let data = await res.json();
+                document.getElementById(id).innerText = '$' + parseFloat(data.price).toFixed(2);
+            } catch(e) { document.getElementById(id).innerText = "Error"; }
         }
-        setInterval(updatePrices, 2000);
+        
+        function updateAll() {
+            getPrice('BTC', 'BTC'); getPrice('ETH', 'ETH'); getPrice('BNB', 'BNB');
+            getPrice('SOL', 'SOL'); getPrice('AVAX', 'AVAX'); getPrice('LTC', 'LTC');
+            getPrice('TON', 'TON'); getPrice('TRX', 'TRX');
+        }
+        setInterval(updateAll, 5000);
+        updateAll();
     </script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>window.Telegram.WebApp.expand();</script>
 </body>
 </html>
