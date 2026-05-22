@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
@@ -11,17 +11,25 @@
         <p>Total Balance</p>
         <div class="balance">$1,250.00</div>
     </div>
-    <div class="button-grid">
-        <div class="btn">Send</div>
-        <div class="btn">Receive</div>
-        <div class="btn">Swap</div>
+    
+    <div class="token-list" id="tokenList">
+        <div class="token-item"><span>USDT</span> <span class="price">$1.00</span></div>
+        <div class="token-item"><span>BNB</span> <span class="price">$580.00</span></div>
+        <div class="token-item"><span>ETH</span> <span class="price">$3500.00</span></div>
     </div>
-    <div class="footer-nav">
-        <div>Wallet</div>
-        <div>Browser</div>
-        <div>Settings</div>
-    </div>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>window.Telegram.WebApp.expand();</script>
+
+    <script>
+        function updatePrices() {
+            const prices = document.querySelectorAll('.price');
+            prices.forEach(p => {
+                let val = parseFloat(p.innerText.replace('$', ''));
+                let change = (Math.random() - 0.5) * 2;
+                let newVal = val + change;
+                p.innerText = '$' + newVal.toFixed(2);
+                p.className = change >= 0 ? 'price price-up' : 'price price-down';
+            });
+        }
+        setInterval(updatePrices, 2000);
+    </script>
 </body>
 </html>
