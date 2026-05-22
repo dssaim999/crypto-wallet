@@ -13,9 +13,9 @@
     </div>
     
     <div class="button-grid">
-        <div class="btn">Deposit</div>
-        <div class="btn">Withdraw</div>
-        <div class="btn">Swap</div>
+        <div class="btn" onclick="openModal('Deposit')">Deposit</div>
+        <div class="btn" onclick="openModal('Withdraw')">Withdraw</div>
+        <div class="btn" onclick="openModal('Swap')">Swap</div>
     </div>
 
     <div class="token-list">
@@ -31,37 +31,18 @@
         <div class="token-item"><span>USDC</span> <span>$1.00</span></div>
     </div>
 
-    <script>
-        let previousPrices = {};
+    <div id="actionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
+        <div style="background:#1a1a1a; padding:20px; border-radius:20px; width:80%; border:1px solid #333;">
+            <h3 id="modalTitle" style="text-align:center; margin-top:0;">Action</h3>
+            <input type="number" id="amountInput" placeholder="Enter Amount" style="width:100%; padding:10px; margin-top:10px; border-radius:10px; border:none; background:#333; color:#fff; box-sizing:border-box;">
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button onclick="closeModal()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#444; color:#fff; cursor:pointer;">Cancel</button>
+                <button onclick="confirmAction()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#38bdf8; color:#000; font-weight:bold; cursor:pointer;">Confirm</button>
+            </div>
+        </div>
+    </div>
 
-        async function getPrice(symbol, id) {
-            try {
-                let res = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}USDT`);
-                let data = await res.json();
-                let newPrice = parseFloat(data.price);
-                let element = document.getElementById(id);
-                
-                if (previousPrices[id] !== undefined) {
-                    if (newPrice > previousPrices[id]) {
-                        element.className = "price price-up";
-                    } else if (newPrice < previousPrices[id]) {
-                        element.className = "price price-down";
-                    }
-                }
-                element.innerText = '$' + newPrice.toFixed(2);
-                previousPrices[id] = newPrice;
-            } catch(e) { console.log("Error"); }
-        }
-        
-        function updateAll() {
-            getPrice('BTC', 'BTC'); getPrice('ETH', 'ETH'); getPrice('BNB', 'BNB');
-            getPrice('SOL', 'SOL'); getPrice('AVAX', 'AVAX'); getPrice('LTC', 'LTC');
-            getPrice('TON', 'TON'); getPrice('TRX', 'TRX');
-        }
-        
-        setInterval(updateAll, 1000); // ১ সেকেন্ডে আপডেট
-        updateAll();
-    </script>
+    <script src="app.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>window.Telegram.WebApp.expand();</script>
 </body>
