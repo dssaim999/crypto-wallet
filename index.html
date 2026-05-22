@@ -12,17 +12,30 @@
         <div class="balance">$1,250.00</div>
     </div>
     
-    <div class="token-list" id="tokenList">
+    <div class="button-grid">
+        <div class="btn">Deposit</div>
+        <div class="btn">Withdraw</div>
+        <div class="btn">Swap</div>
+    </div>
+
+    <div class="token-list">
         <div class="token-item"><span>USDT</span> <span class="price">$1.00</span></div>
+        <div class="token-item"><span>USDC</span> <span class="price">$1.00</span></div>
         <div class="token-item"><span>BNB</span> <span class="price">$580.00</span></div>
         <div class="token-item"><span>ETH</span> <span class="price">$3500.00</span></div>
+        <div class="token-item"><span>AVAX</span> <span class="price">$35.00</span></div>
+        <div class="token-item"><span>LTC</span> <span class="price">$85.00</span></div>
+        <div class="token-item"><span>SOL</span> <span class="price">$170.00</span></div>
+        <div class="token-item"><span>TON</span> <span class="price">$6.50</span></div>
+        <div class="token-item"><span>BTC</span> <span class="price">$65000.00</span></div>
+        <div class="token-item"><span>TRON</span> <span class="price">$0.12</span></div>
     </div>
 
     <script>
         function updatePrices() {
             const prices = document.querySelectorAll('.price');
             prices.forEach(p => {
-                let val = parseFloat(p.innerText.replace('$', ''));
+                let val = parseFloat(p.innerText.replace('$', '').replace(',', ''));
                 let change = (Math.random() - 0.5) * 2;
                 let newVal = val + change;
                 p.innerText = '$' + newVal.toFixed(2);
