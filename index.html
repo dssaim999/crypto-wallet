@@ -5,26 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <title>TDR X Wallet</title>
 </head>
-<body><div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
-    <h1 id="walletName" style="color:#38bdf8; font-size:35px; animation: textAnimation 4s forwards;">TDR X Wallet</h1>
-    <div id="actionButtons" style="display:none; text-align:center;">
-        <button onclick="createWallet()" style="padding:15px 30px; margin:10px; background:#38bdf8; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">Create Wallet</button>
-        <button onclick="importWallet()" style="padding:15px 30px; margin:10px; background:transparent; border:1px solid #38bdf8; color:#38bdf8; border-radius:10px; cursor:pointer;">I have a wallet</button>
-    </div>
-</div>
-<style>
-    @keyframes textAnimation { 0%{opacity:0;} 30%{opacity:1;} 70%{opacity:1;} 100%{opacity:0;} }
-</style>
-<script>
-    setTimeout(function() {
-        document.getElementById('walletName').style.display = 'none';
-        document.getElementById('actionButtons').style.display = 'block';
-    }, 4000);
-    function createWallet() { alert("Your Recovery Phrase: market ocean desert silent silver stable tunnel engine vanish bridge memory future"); }
-    function importWallet() { prompt("Enter your 12-word recovery phrase:"); }
-</script>
-    <div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
-    <h1
+<body>
 </script>
     <div id="animationContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;">
         <h1 id="walletName" style="color:#38bdf8; font-size:35px; animation: textAnimation 4s forwards;">TDR X Wallet</h1>
